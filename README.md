@@ -10,7 +10,7 @@ In order to understand trends we look at the slope of the number of cases in log
 ## How
 By defaul the graph will show the numbers for `Italy`, `US`, `Germany`, `Norway` and `Spain`.
 You can include other countries, if available, by just adding the name after the script's name
-Run
+
 ```python
 python run.py Japan
 ```

@@ -7,21 +7,26 @@ import sys
 
 data = requests.get("https://pomber.github.io/covid19/timeseries.json").json()
 
-countries = list(data.keys())
+def parse_countries(data:json) -> list:
+    countries = list(data.keys())
 
-default_countries = ["Germany", "US", "Spain", "Norway", "Italy"]
-all_countries = list()
+    default_countries = ["Germany", "US", "Spain", "Norway", "Italy"]
+    all_countries = list()
 
-def get_listed_countries(candidate):
-    if candidate in countries:
-        return True
-    return False
+    def get_listed_countries(candidate):
+        if candidate in countries:
+            return True
+        return False
 
-new_countries = sys.argv[1:]
-new_countries = list(filter(get_listed_countries, new_countries))
+    new_countries = sys.argv[1:]
+    new_countries = list(filter(get_listed_countries, new_countries))
 
-all_countries.extend(default_countries)
-all_countries.extend(new_countries)
+    all_countries.extend(default_countries)
+    all_countries.extend(new_countries)
+    return all_countries
+
+
+all_countries = parse_countries(data)
 
 confirmed = defaultdict(list)
 for c in all_countries:
@@ -37,8 +42,14 @@ for c in all_countries:
 
     confirmed[c] = new_local_data
 
+align_around = 400
+align_indexes = defaultdict(list)
+for c, v in confirmed.items():
+    dist = np.abs(np.array(v) - align_around)
+    align_indexes[c] = np.argmin(dist)
+
 # Simple graph
-plt.subplot(2, 2, 1)
+plt.subplot(2, 3, 1)
 for c, v in confirmed.items():
     if c == "Italy":
         linewidth = 2.5
@@ -50,8 +61,37 @@ plt.legend(loc="upper left")
 plt.title("Number of cases", fontsize=14, fontweight='bold')
 plt.xlabel("Days since February 22 2020")
 
+# Simple aligned
+plt.subplot(2, 3, 2)
+for c, v in confirmed.items():
+    if c == "Italy":
+        linewidth = 2.5
+    else:
+        linewidth = 1.4
+    plt.plot(v[align_indexes[c]:], label=c, linewidth=linewidth)
+    
+plt.legend(loc="upper left")
+plt.title("Number of cases", fontsize=14, fontweight='bold')
+plt.xlabel("Days since cases are around 400")
+
+# Logarithm Gradient
+plt.subplot(2, 3, 3)
+for c, v in confirmed.items():
+    if c == "Italy":
+        linewidth = 2.5
+    else:
+        linewidth = 1.4
+    array = np.array(v)
+    log_array = np.log10(array+1)
+    array = np.gradient(log_array)
+    plt.plot(array, label=c, linewidth=linewidth)
+
+plt.legend(loc="upper left")
+plt.title("Gradient of number of cases in log scale", fontsize=14, fontweight='bold')
+plt.xlabel("Days since February 22 2020")
+
 # Logarithm
-plt.subplot(2, 2, 2)
+plt.subplot(2, 3, 4)
 for c, v in confirmed.items():
     if c == "Italy":
         linewidth = 2.5
@@ -64,27 +104,8 @@ plt.legend(loc="upper left")
 plt.title("Number of cases in log scale", fontsize=14, fontweight='bold')
 plt.xlabel("Days since February 22 2020")
 
-align_around = 400
-align_indexes = defaultdict(list)
-for c, v in confirmed.items():
-    dist = np.abs(np.array(v) - align_around)
-    align_indexes[c] = np.argmin(dist)
-
-# Simple aligned
-plt.subplot(2, 2, 3)
-for c, v in confirmed.items():
-    if c == "Italy":
-        linewidth = 2.5
-    else:
-        linewidth = 1.4
-    plt.plot(v[align_indexes[c]:], label=c, linewidth=linewidth)
-    
-plt.legend(loc="upper left")
-plt.title("Number of cases", fontsize=14, fontweight='bold')
-plt.xlabel("Days since cases are around 400")
-
 # Logarithm aligned
-plt.subplot(2, 2, 4)
+plt.subplot(2, 3, 5)
 for c, v in confirmed.items():
     if c == "Italy":
         linewidth = 2.5
@@ -96,6 +117,24 @@ for c, v in confirmed.items():
 plt.legend(loc="upper left")
 plt.title("Number of cases in log scale", fontsize=14, fontweight='bold')
 plt.xlabel("Days since cases are around 400")
+
+# Logarithm aligned Gradient
+plt.subplot(2, 3, 6)
+for c, v in confirmed.items():
+    if c == "Italy":
+        linewidth = 2.5
+    else:
+        linewidth = 1.4
+    array = np.array(v)
+    alinged_array = array[align_indexes[c]:]
+    log_array = np.log10(alinged_array+1)
+    array = np.gradient(log_array)
+    plt.plot(array, label=c, linewidth=linewidth)
+
+plt.legend(loc="upper left")
+plt.title("Gradient of number of cases in log scale", fontsize=14, fontweight='bold')
+plt.xlabel("Days since cases are around 400")
+
 plt.show()
 
 """ GROWTH RATE """
