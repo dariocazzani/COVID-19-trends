@@ -17,5 +17,5 @@ You can include other countries, if available, by just adding the name after the
 
 ## Results as of March 17th 2020
 
-![Cases](link-to-image)
-![Growth Rate](link-to-image)
+![Cases](https://github.com/dariocazzani/COVID-19-trends/blob/master/images/image1.png)
+![Growth Rate](https://github.com/dariocazzani/COVID-19-trends/blob/master/images/image2.png)
