@@ -6,6 +6,7 @@ import requests
 import sys
 
 data = requests.get("https://pomber.github.io/covid19/timeseries.json").json()
+ALIGN_AROUND = 400 # cases
 
 def parse_countries(data:json) -> list:
     countries = list(data.keys())
@@ -25,27 +26,31 @@ def parse_countries(data:json) -> list:
     all_countries.extend(new_countries)
     return all_countries
 
+def compute_confirmed_cases() -> dict:
+    confirmed = defaultdict(list)
+    for c in all_countries:
+        local_data = [d.get("confirmed") for d in data[c]]
+        # Clean when there are dates with no update and a "sudden" jump
+        new_local_data = list()
 
+        for idx, d in enumerate(local_data):
+            if idx > 1 and idx < len(local_data) and d - local_data[idx-1] == 0:
+                new_local_data.append((local_data[idx-1] + local_data[idx+1]) / 2)
+            else:
+                new_local_data.append(d)
+
+        confirmed[c] = new_local_data
+    return confirmed
+
+# Get all data for each country
 all_countries = parse_countries(data)
+# Compute the number of cases for each country
+confirmed = compute_confirmed_cases()
 
-confirmed = defaultdict(list)
-for c in all_countries:
-    local_data = [d.get("confirmed") for d in data[c]]
-    # Clean when there are dates with no update and a "sudden" jump
-    new_local_data = list()
-
-    for idx, d in enumerate(local_data):
-        if idx > 1 and idx < len(local_data) and d - local_data[idx-1] == 0:
-            new_local_data.append((local_data[idx-1] + local_data[idx+1]) / 2)
-        else:
-            new_local_data.append(d)
-
-    confirmed[c] = new_local_data
-
-align_around = 400
+# Compute the index for each country in order to align around the same number of cases
 align_indexes = defaultdict(list)
 for c, v in confirmed.items():
-    dist = np.abs(np.array(v) - align_around)
+    dist = np.abs(np.array(v) - ALIGN_AROUND)
     align_indexes[c] = np.argmin(dist)
 
 # Simple graph
