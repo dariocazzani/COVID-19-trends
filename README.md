@@ -14,3 +14,8 @@ In order to understand trends we look at the slope of the number of cases in log
 * By defaul the graphs will show the numbers for `Italy`, `US`, `Germany`, `Norway` and `Spain`. <br>
 You can include other countries, if available, by just adding the name after the script's name
 * ```python run.py Japan```
+
+## Results as of March 17th 2020
+
+![Cases](link-to-image)
+![Growth Rate](link-to-image)
