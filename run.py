@@ -14,13 +14,8 @@ def parse_countries(data:json) -> list:
     default_countries = ["Germany", "US", "Spain", "Norway", "Italy"]
     all_countries = list()
 
-    def get_listed_countries(candidate):
-        if candidate in countries:
-            return True
-        return False
-
     new_countries = sys.argv[1:]
-    new_countries = list(filter(get_listed_countries, new_countries))
+    new_countries = list(filter(lambda x: x in countries, new_countries))
 
     all_countries.extend(default_countries)
     all_countries.extend(new_countries)
