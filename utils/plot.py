@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_cases(confirmed, align_indexes):
+def plot_cases(confirmed, align_indexes, align_around):
     # Simple graph
     plt.subplot(2, 3, 1)
     for c, v in confirmed.items():
@@ -13,7 +13,7 @@ def plot_cases(confirmed, align_indexes):
 
     plt.legend(loc="upper left")
     plt.title("Number of cases", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since February 22 2020")
+    plt.xlabel(f"Days since February 22 2020")
 
     # Simple aligned
     plt.subplot(2, 3, 2)
@@ -26,7 +26,7 @@ def plot_cases(confirmed, align_indexes):
         
     plt.legend(loc="upper left")
     plt.title("Number of cases", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since cases are around 400")
+    plt.xlabel(f"Days since cases are around {align_around}")
 
     # Logarithm Gradient
     plt.subplot(2, 3, 3)
@@ -42,7 +42,7 @@ def plot_cases(confirmed, align_indexes):
 
     plt.legend(loc="upper left")
     plt.title("Gradient of number of cases in log scale", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since February 22 2020")
+    plt.xlabel(f"Days since February 22 2020")
 
     # Logarithm
     plt.subplot(2, 3, 4)
@@ -56,7 +56,7 @@ def plot_cases(confirmed, align_indexes):
 
     plt.legend(loc="upper left")
     plt.title("Number of cases in log scale", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since February 22 2020")
+    plt.xlabel(f"Days since February 22 2020")
 
     # Logarithm aligned
     plt.subplot(2, 3, 5)
@@ -70,7 +70,7 @@ def plot_cases(confirmed, align_indexes):
 
     plt.legend(loc="upper left")
     plt.title("Number of cases in log scale", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since cases are around 400")
+    plt.xlabel(f"Days since cases are around {align_around}")
 
     # Logarithm aligned Gradient
     plt.subplot(2, 3, 6)
@@ -87,12 +87,12 @@ def plot_cases(confirmed, align_indexes):
 
     plt.legend(loc="upper left")
     plt.title("Gradient of number of cases in log scale", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since cases are around 400")
+    plt.xlabel(f"Days since cases are around {align_around}")
 
     plt.show()
 
 
-def plot_growth(growths, align_indexes):
+def plot_growth(growths, align_indexes, align_around):
     growth_rate, growth_rate_moving_average, growth_rate_global_moving_average = growths
     # Raw Growth Rate
     plt.subplot(2, 3, 1)
@@ -105,7 +105,7 @@ def plot_growth(growths, align_indexes):
         
     plt.legend(loc="upper left")
     plt.title("Growth Rate Raw", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since February 22 2020")
+    plt.xlabel(f"Days since February 22 2020")
 
     # Raw Growth Rate
     plt.subplot(2, 3, 2)
@@ -118,7 +118,7 @@ def plot_growth(growths, align_indexes):
         
     plt.legend(loc="upper left")
     plt.title("Growth Rate moving average 5 days", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since February 22 2020")
+    plt.xlabel(f"Days since February 22 2020")
 
 
     plt.subplot(2, 3, 3)
@@ -131,7 +131,7 @@ def plot_growth(growths, align_indexes):
         
     plt.legend(loc="upper left")
     plt.title("Growth Rate global moving average", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since February 22 2020")
+    plt.xlabel(f"Days since February 22 2020")
 
 
     plt.subplot(2, 3, 4)
@@ -144,7 +144,7 @@ def plot_growth(growths, align_indexes):
         
     plt.legend(loc="upper left")
     plt.title("Growth Rate Raw", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since cases are around 400")
+    plt.xlabel(f"Days since cases are around {align_around}")
 
 
     plt.subplot(2, 3, 5)
@@ -157,7 +157,7 @@ def plot_growth(growths, align_indexes):
         
     plt.legend(loc="upper left")
     plt.title("Growth Rate moving average 5 days", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since cases are around 400")
+    plt.xlabel(f"Days since cases are around {align_around}")
 
 
     plt.subplot(2, 3, 6)
@@ -170,6 +170,6 @@ def plot_growth(growths, align_indexes):
         
     plt.legend(loc="upper left")
     plt.title("Growth Rate global moving average", fontsize=14, fontweight='bold')
-    plt.xlabel("Days since cases are around 400")
+    plt.xlabel(f"Days since cases are around {align_around}")
 
     plt.show()
