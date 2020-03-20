@@ -1,7 +1,7 @@
 # COVID-19 TRENDS
 
 ## Data
-Data ordered per country is managed by [this resource](https://github.com/pomber/covid19)
+Data ordered per country is managed by [this resource](https://github.com/pomber/covid19) <br>
 Data ordered per Italian Province is managed by [this resource](https://github.com/pcm-dpc/COVID-19) 
 
 ## What
