@@ -8,7 +8,7 @@ data = requests.get("https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/d
 def parse_provinces() -> list:
     provinces = list(set([element.get("sigla_provincia") for element in data]))
 
-    default_provinces = ["VA", "BG", "MI", "CO", "RO", "NA"]
+    default_provinces = ["VA", "BG", "MI", "CO", "RO"]
     all_provinces = list()
 
     new_provinces = sys.argv[1:]
@@ -26,12 +26,16 @@ def compute_provinces_confirmed_cases() -> dict:
     
     for p in all_provinces:
         local_data = [element.get("totale_casi") for element in data if element.get("sigla_provincia") == p]
-        # Clean when there are dates with no update and a "sudden" jump
         new_local_data = list()
 
+        # Clean from "mistakes" in the data
         for idx, d in enumerate(local_data):
             if idx > 1 and idx < len(local_data) and d - local_data[idx-1] == 0:
+                # Clean when there are dates with no update and a "sudden" jump
                 new_local_data.append((local_data[idx-1] + local_data[idx+1]) / 2)
+            if idx > 0 and d < local_data[idx-1]:
+                # the total number of cases can't decrease
+                new_local_data.append(max(local_data[:idx]))
             else:
                 new_local_data.append(d)
 

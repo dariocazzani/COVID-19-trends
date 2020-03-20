@@ -5,7 +5,7 @@ def plot_cases(confirmed, align_indexes, align_around):
     # Simple graph
     plt.subplot(2, 3, 1)
     for c, v in confirmed.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -18,7 +18,7 @@ def plot_cases(confirmed, align_indexes, align_around):
     # Simple aligned
     plt.subplot(2, 3, 2)
     for c, v in confirmed.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -31,7 +31,7 @@ def plot_cases(confirmed, align_indexes, align_around):
     # Logarithm Gradient
     plt.subplot(2, 3, 3)
     for c, v in confirmed.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -47,7 +47,7 @@ def plot_cases(confirmed, align_indexes, align_around):
     # Logarithm
     plt.subplot(2, 3, 4)
     for c, v in confirmed.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -61,7 +61,7 @@ def plot_cases(confirmed, align_indexes, align_around):
     # Logarithm aligned
     plt.subplot(2, 3, 5)
     for c, v in confirmed.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -75,7 +75,7 @@ def plot_cases(confirmed, align_indexes, align_around):
     # Logarithm aligned Gradient
     plt.subplot(2, 3, 6)
     for c, v in confirmed.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -97,7 +97,7 @@ def plot_growth(growths, align_indexes, align_around):
     # Raw Growth Rate
     plt.subplot(2, 3, 1)
     for c, v in growth_rate.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -110,7 +110,7 @@ def plot_growth(growths, align_indexes, align_around):
     # Raw Growth Rate
     plt.subplot(2, 3, 2)
     for c, v in growth_rate_moving_average.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -123,7 +123,7 @@ def plot_growth(growths, align_indexes, align_around):
 
     plt.subplot(2, 3, 3)
     for c, v in growth_rate_global_moving_average.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -136,7 +136,7 @@ def plot_growth(growths, align_indexes, align_around):
 
     plt.subplot(2, 3, 4)
     for c, v in growth_rate.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -149,7 +149,7 @@ def plot_growth(growths, align_indexes, align_around):
 
     plt.subplot(2, 3, 5)
     for c, v in growth_rate_moving_average.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4
@@ -162,7 +162,7 @@ def plot_growth(growths, align_indexes, align_around):
 
     plt.subplot(2, 3, 6)
     for c, v in growth_rate_global_moving_average.items():
-        if c == "Italy":
+        if c == "Italy" or c == "VA":
             linewidth = 2.5
         else:
             linewidth = 1.4

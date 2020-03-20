@@ -14,7 +14,7 @@ In order to understand trends we look at the slope of the number of cases in log
 * ```pip install -r requirements.txt ```
 * By defaul the graphs will show the numbers for 
     * `Italy`, `US`, `Germany`, `Norway` and `Spain`. <br>
-    * `VA`, `BG`, `MI`, `CO`, `RO`, `NA` <br>
+    * `VA`, `BG`, `MI`, `CO`, `RO` <br>
 
 You can include other countries or provinces, if available, by just adding the name after the script's name
 * ```python run_countries.py Japan```
