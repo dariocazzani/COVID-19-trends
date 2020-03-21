@@ -12,7 +12,11 @@ ALIGN_AROUND = 20 # cases
 if __name__ == "__main__":    
     # Compute the number of cases for each country
     confirmed = compute_provinces_confirmed_cases()
-    # import pdb; pdb.set_trace()
+
+    # Compute maximum number of cases we can align around: min (ALIGN_AROUND, x)
+    # Take the second biggest one
+    minimums = [sorted(v)[-2] for c, v in confirmed.items()]
+    new_align_around = np.minimum(ALIGN_AROUND, np.min(minimums))
 
     # Compute the index for each country in order to align around the same number of cases
     align_indexes = defaultdict(list)
