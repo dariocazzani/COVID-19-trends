@@ -20,7 +20,7 @@ You can include other countries or provinces, if available, by just adding the n
 * ```python run_countries.py Japan```
 * ```python run_italy.py VE```
 
-## Results as of March 18th 2020
+## Results as of March 22nd 2020
 
 ### COUNTRIES
 ![Cases](https://github.com/dariocazzani/COVID-19-trends/blob/master/images/image1.png)
