@@ -23,8 +23,11 @@ You can include other countries or provinces, if available, by just adding the n
 ## Results as of March 30th 2020
 
 ### COUNTRIES
+#### Cases
 ![Cases](https://github.com/dariocazzani/COVID-19-trends/blob/master/images/image1.png)
+#### Deaths
 ![Deaths](https://github.com/dariocazzani/COVID-19-trends/blob/master/images/image2.png)
 
 ### PROVINCES
+#### Cases
 ![Cases](https://github.com/dariocazzani/COVID-19-trends/blob/master/images/image3.png)
