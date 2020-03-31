@@ -23,17 +23,27 @@ def compute_countries_confirmed_cases() -> dict:
     # Get all data for each country
     all_countries = parse_countries()
     confirmed = defaultdict(list)
+    confirmed_deaths = defaultdict(list)
     
     for c in all_countries:
-        local_data = [d.get("confirmed") for d in data[c]]
+        local_data_cases = [d.get("confirmed") for d in data[c]]
+        local_data_deaths = [d.get("deaths") for d in data[c]]
         # Clean when there are dates with no update and a "sudden" jump
-        new_local_data = list()
+        new_local_data_cases = list()
+        new_local_data_deaths = list()
 
-        for idx, d in enumerate(local_data):
-            if idx > 1 and idx < len(local_data) and d - local_data[idx-1] == 0:
-                new_local_data.append((local_data[idx-1] + local_data[idx+1]) / 2)
+        for idx, d in enumerate(local_data_cases):
+            if idx > 1 and idx < len(local_data_cases) and d - local_data_cases[idx-1] == 0:
+                new_local_data_cases.append((local_data_cases[idx-1] + local_data_cases[idx+1]) / 2)
             else:
-                new_local_data.append(d)
+                new_local_data_cases.append(d)
 
-        confirmed[c] = new_local_data
-    return confirmed
+        for idx, d in enumerate(local_data_deaths):
+            if idx > 1 and idx < len(local_data_deaths) and d - local_data_deaths[idx-1] == 0:
+                new_local_data_deaths.append((local_data_deaths[idx-1] + local_data_deaths[idx+1]) / 2)
+            else:
+                new_local_data_deaths.append(d)
+
+        confirmed[c] = new_local_data_cases
+        confirmed_deaths[c] = new_local_data_deaths
+    return confirmed, confirmed_deaths

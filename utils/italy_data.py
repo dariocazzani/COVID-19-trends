@@ -30,7 +30,7 @@ def compute_provinces_confirmed_cases() -> dict:
 
         # Clean from "mistakes" in the data
         for idx, d in enumerate(local_data):
-            if idx > 1 and idx < len(local_data) and d - local_data[idx-1] == 0:
+            if idx > 1 and idx < (len(local_data)-1) and d - local_data[idx-1] == 0:
                 # Clean when there are dates with no update and a "sudden" jump
                 new_local_data.append((local_data[idx-1] + local_data[idx+1]) / 2)
             if idx > 0 and d < local_data[idx-1]:
