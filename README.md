@@ -7,7 +7,7 @@ Data ordered per Italian Province is managed by [this resource](https://github.c
 ## What
 * Country: All available data is an historical of number of cases and deaths per country. <br>
 * Italian Provinces: The available data is more detailed. <br>
-In order to understand trends we look at the slope of the number of cases in log scale and the how the growth rate changes over time.
+In order to understand trends we look at the slope of the number of cases and deaths in linear and long scale.
 
 ## How
 * It works with python >= 3.5
