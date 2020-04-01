@@ -10,7 +10,7 @@ Data ordered per Italian Province is managed by [this resource](https://github.c
 In order to understand trends we look at the slope of the number of cases and deaths in linear and long scale.
 
 ## How
-* It works with python >= 3.5
+* It works with python >= 3.6
 * ```pip install -r requirements.txt ```
 * By defaul the graphs will show the numbers for 
     * `Italy`, `US`, `Germany`, `Norway` and `Spain`. <br>
