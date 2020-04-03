@@ -10,7 +10,7 @@ ALIGN_AROUND = 100 # cases
 
 if __name__ == "__main__":    
     # Compute the number of cases for each country
-    confirmed, confirmed_deaths = compute_countries_confirmed_cases()
+    confirmed, confirmed_deaths, world_data = compute_countries_confirmed_cases()
 
     # Compute maximum number of cases we can align around: min (ALIGN_AROUND, x)
     # Take the second biggest one
@@ -18,11 +18,11 @@ if __name__ == "__main__":
     minimums_deaths = [sorted(v)[-2] for c, v in confirmed_deaths.items()]
     new_align_around_cases = np.minimum(ALIGN_AROUND, np.min(minimums_cases))
     new_align_around_deaths = np.minimum(ALIGN_AROUND, np.min(minimums_deaths))
-
+   
     # Compute the index for each country in order to align around the same number of cases
     align_indexes_cases = defaultdict(list)
     align_indexes_deaths = defaultdict(list)
-
+   
     for c, v in confirmed.items():
         dist = np.abs(np.array(v) - new_align_around_cases)
         align_indexes_cases[c] = np.argmin(dist)
@@ -32,3 +32,4 @@ if __name__ == "__main__":
 
     plot(confirmed, align_indexes_cases, new_align_around_cases, "cases")
     plot(confirmed_deaths, align_indexes_deaths, new_align_around_deaths, "deaths")
+    plot(world_data, title="cases and deaths in the world")

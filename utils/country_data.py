@@ -2,6 +2,7 @@ from collections import defaultdict
 import json
 import sys
 import requests
+import numpy as np
 
 data = requests.get("https://pomber.github.io/covid19/timeseries.json").json()
 
@@ -24,6 +25,9 @@ def compute_countries_confirmed_cases() -> dict:
     all_countries = parse_countries()
     confirmed = defaultdict(list)
     confirmed_deaths = defaultdict(list)
+    world_cases = list()
+    world_deaths = list()
+    world_recovered = list()
     
     for c in all_countries:
         local_data_cases = [d.get("confirmed") for d in data[c]]
@@ -46,4 +50,18 @@ def compute_countries_confirmed_cases() -> dict:
 
         confirmed[c] = new_local_data_cases
         confirmed_deaths[c] = new_local_data_deaths
-    return confirmed, confirmed_deaths
+
+    for _, v in data.items():
+        cases = [d.get("confirmed") for d in v]
+        world_cases.append(cases)
+        deaths = [d.get("deaths") for d in v]
+        world_deaths.append(deaths)
+        recovered = [d.get("recovered") for d in v]
+        world_recovered.append(recovered)
+    
+    world_deaths = np.sum(np.array(world_deaths),0)
+    world_cases = np.sum(np.array(world_cases),0)    
+    world_recovered = np.sum(np.array(world_recovered),0)    
+    world_data = {"deaths":world_deaths, "cases":world_cases, "recovered":world_recovered}
+        
+    return confirmed, confirmed_deaths, world_data
