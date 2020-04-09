@@ -35,15 +35,15 @@ def compute_countries_confirmed_cases() -> dict:
         # Clean when there are dates with no update and a "sudden" jump
         new_local_data_cases = list()
         new_local_data_deaths = list()
-
+    
         for idx, d in enumerate(local_data_cases):
-            if idx > 1 and idx < len(local_data_cases) and d - local_data_cases[idx-1] == 0:
+            if idx > 1 and idx < len(local_data_cases)-1 and d - local_data_cases[idx-1] == 0:
                 new_local_data_cases.append((local_data_cases[idx-1] + local_data_cases[idx+1]) / 2)
             else:
                 new_local_data_cases.append(d)
 
         for idx, d in enumerate(local_data_deaths):
-            if idx > 1 and idx < len(local_data_deaths) and d - local_data_deaths[idx-1] == 0:
+            if idx > 1 and idx < len(local_data_deaths)-1 and d - local_data_deaths[idx-1] == 0:
                 new_local_data_deaths.append((local_data_deaths[idx-1] + local_data_deaths[idx+1]) / 2)
             else:
                 new_local_data_deaths.append(d)
